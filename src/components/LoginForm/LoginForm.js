@@ -7,14 +7,39 @@ const LoginForm = () => {
     username: "",
     password: "",
   });
-  const handleSubmit = () => {};
-  console.log(ApIJobly);
-  const handleChange = (e) => {};
+  const [formErrors, setFormErrors] = useState([]);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
   return (
     <div className="LoginForm">
       <form onSubmit={handleSubmit}>
-        <input type="text" name="username" placeholder="username" />
-        <input type="password" name="password" placeholder="password" />
+        <div>
+          <label htmlFor="login-username">Username</label>
+          <input
+            onChange={handleChange}
+            value={formData.username}
+            type="text"
+            id="login-username"
+            name="username"
+            placeholder="username"
+          />
+        </div>
+        <div>
+          {" "}
+          <label htmlFor="login-password">Password</label>
+          <input
+            onChange={handleChange}
+            value={formData.password}
+            type="password"
+            id="login-password"
+            name="password"
+            placeholder="password"
+          />
+        </div>
         <input type="submit" value="Login" />
         <Link to="/">Cancel</Link>
       </form>
