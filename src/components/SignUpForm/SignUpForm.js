@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import JoblyApi from "../../api";
 
-const SignUpForm = () => {
+const SignUpForm = ({signup}) => {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -11,14 +11,18 @@ const SignUpForm = () => {
     email: "",
   });
 
-  const [formErrors, setFormErrors] = useState([]);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+  const [formErrors, setFormErrors] = useState(null);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(formData);
+    const result = await signup(formData);
+    if (result) {
+    } else setFormErrors(result.error);
   };
   return (
     <div className="SignUpForm">
@@ -32,6 +36,7 @@ const SignUpForm = () => {
             id="username"
             name="username"
             placeholder="username"
+            required
           />
         </div>
         <div>
@@ -44,6 +49,7 @@ const SignUpForm = () => {
             id="password"
             name="password"
             placeholder="password"
+            required
           />
         </div>
         <div>
@@ -55,6 +61,7 @@ const SignUpForm = () => {
             id="firstname"
             name="firstName"
             placeholder="first name"
+            required
           />
         </div>{" "}
         <div>
@@ -66,6 +73,7 @@ const SignUpForm = () => {
             id="lastname"
             name="lastName"
             placeholder="last name"
+            required
           />
         </div>
         <div>
@@ -77,6 +85,7 @@ const SignUpForm = () => {
             id="email"
             name="email"
             placeholder="email"
+            required
           />
         </div>
         <input type="submit" value="Sing Up" />
