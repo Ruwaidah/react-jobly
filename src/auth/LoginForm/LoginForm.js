@@ -1,8 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useState } from "react";
-import JoblyApi from "../../api";
+import { useContext } from "react";
+import UserContext from "../UserContext";
 
 const LoginForm = ({ login }) => {
+  const { token } = useContext(UserContext);
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -21,7 +23,7 @@ const LoginForm = ({ login }) => {
       setFormErrors(result);
     }
   };
-
+  if (token) return <Navigate to="/companies" />;
   return (
     <div className="LoginForm">
       <form onSubmit={handleSubmit}>

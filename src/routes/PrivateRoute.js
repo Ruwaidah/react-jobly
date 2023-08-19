@@ -5,9 +5,8 @@ import Profile from "../components/ProfilePage/ProfilePage";
 import { Outlet } from "react-router-dom";
 
 const PrivateRoute = () => {
-  const { user } = useContext(UserContext);
-  console.log(user)
-  return user ? <Outlet /> : <Navigate to="/" />;
+  const { token, user } = useContext(UserContext);
+  return token ? <Outlet /> : <Navigate to="/" />;
 };
 
 export default PrivateRoute;

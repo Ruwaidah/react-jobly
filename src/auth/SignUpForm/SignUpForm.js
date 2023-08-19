@@ -1,8 +1,10 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, Navigate } from "react-router-dom";
 import JoblyApi from "../../api";
+import UserContext from "../UserContext";
 
-const SignUpForm = ({signup}) => {
+const SignUpForm = ({ signup }) => {
+  const { token } = useContext(UserContext);
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -24,6 +26,8 @@ const SignUpForm = ({signup}) => {
     if (result) {
     } else setFormErrors(result.error);
   };
+
+  if (token) return <Navigate to="/companies" />;
   return (
     <div className="SignUpForm">
       <form onSubmit={handleSubmit}>

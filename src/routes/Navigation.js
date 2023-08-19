@@ -1,17 +1,12 @@
-import { Link, redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useContext } from "react";
 import UserContext from "../auth/UserContext";
 
-const Navigation = () => {
-  const { user } = useContext(UserContext);
-  const logout = () => {
-    console.log("ewfwef");
-    localStorage.clear();
-    redirect("/");
-  };
+const Navigation = ({ logout }) => {
+  const { token, user } = useContext(UserContext);
   return (
     <div className="Navigation">
-      {user ? (
+      {token&&user ? (
         <>
           {" "}
           <Link to="/">Jobly</Link>
@@ -19,7 +14,7 @@ const Navigation = () => {
           <Link to="/jobs">Jobs</Link>
           <Link to="/companies">Companies</Link>
           <Link to="/" onClick={logout}>
-            Logout
+            Logout {user.username}
           </Link>
         </>
       ) : (
