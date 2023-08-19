@@ -1,39 +1,37 @@
 import "./App.css";
-import LandingPag from "./components/LandingPage/LandingPage";
-import { Route, Routes } from "react-router-dom";
-import NavBar from "./components/NavBar/NavBar";
-import LoginForm from "./components/LoginForm/LoginForm";
-import SignUpForm from "./components/SignUpForm/SignUpForm";
-import NotFound from "./components/NotFound/NotFound";
+import RoutesComponent from "./routes/RoutesComponent";
 import UserContext from "./auth/UserContext";
 import JoblyApi from "./api";
-import useLocalStorageState from "./auth/useLocalStorageState";
+import useLocalStorageState from "./hooks/useLocalStorageState";
+import Navigation from "./routes/Navigation";
+import { useNavigate } from "react-router-dom";
 
 function App() {
-  const [state, setState] = useLocalStorageState("token",null)
-  const signup = (data) => {
-    JoblyApi.signup(data).then(result => {
-      setState(result)
-    }).catch(error => console.log(error))
+  const [user, setUser] = useLocalStorageState("token", null);
+  const navigate = useNavigate()
   
-  }
+  const signup = (data) => {
+    JoblyApi.signup(data)
+      .then((result) => {
+        setUser(result);
+        navigate("/")
+      })
+      .catch((error) => console.log(error));
+  };
+  const login = (data) => {
+    JoblyApi.login(data)
+      .then((result) => {
+        setUser(result);
+        navigate("/")
+      })
+      .catch((error) => "Error Login");
+  };
 
-  const login = (data) =>  {
-    JoblyApi.login(data).then(result => {
-      console.log(result,setState("token", result))
-      setState("token", result)
-    }).catch(error =>  "Error Login")
-  }
   return (
     <div className="App">
-      <UserContext.Provider>
-        <NavBar />
-        <Routes>
-          <Route path="/" element={<LandingPag />} />
-          <Route path="/login" element={<LoginForm login={login}/>} />
-          <Route path="/signup" element={<SignUpForm signup={signup}/>} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+      <UserContext.Provider value={{ user }}>
+        <Navigation />
+        <RoutesComponent login={login} signup={signup} />
       </UserContext.Provider>
     </div>
   );

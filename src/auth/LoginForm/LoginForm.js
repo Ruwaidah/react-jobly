@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import JoblyApi from "../../api";
 
-const LoginForm = ({login}) => {
+const LoginForm = ({ login }) => {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -15,13 +15,11 @@ const LoginForm = ({login}) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const result = await login(formData)
+    const result = await login(formData);
     if (result) {
-
     } else {
-      setFormErrors(result)
+      setFormErrors(result);
     }
-   console.log(result) 
   };
 
   return (
