@@ -24,7 +24,7 @@ const SignUpForm = ({ signup }) => {
     console.log(formData);
     const result = await signup(formData);
     if (result) {
-    } else setFormErrors(result.error);
+    } else setFormErrors(result);
   };
 
   if (token) return <Navigate to="/companies" />;

@@ -6,20 +6,29 @@ import SearchForm from "../Companies/SearchForm";
 const Jobs = () => {
   const [jobs, setJobs] = useState(null);
   useEffect(() => {
-    async function getJobs() {
-      try {
-        const data = await JoblyApi.getJobs();
-        setJobs(data);
-      } catch {}
-    }
     getJobs();
   }, []);
-  if (!jobs) return <h4>Loading</h4>
+  async function getJobs() {
+    try {
+      const data = await JoblyApi.getJobs();
+      setJobs(data);
+    } catch {}
+  }
+  const serachSubmit = (data) => {
+    if (data === "") {
+      getJobs();
+    } else {
+      const newJobs = jobs.filter((job) => job.title.toLowerCase().includes(data.toLowerCase()));
+      setJobs(newJobs);
+    }
+  };
+
+  if (!jobs) return <h4>Loading</h4>;
   return (
     <div className="Jobs">
       <h2>Jobs</h2>
-      <SearchForm />
-      <JobsDetails jobs={jobs}/>{" "}
+      <SearchForm serachSubmit={serachSubmit} />
+      {jobs.length === 0 ? <p>No results</p> : <JobsDetails jobs={jobs} />}
     </div>
   );
 };

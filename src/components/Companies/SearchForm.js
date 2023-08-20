@@ -1,22 +1,21 @@
 import { useState } from "react";
 
-const SearchForm = () => {
-  const [fromData, setFormData] = useState({
-    name: "",
-  });
+const SearchForm = ({ serachSubmit }) => {
+  const [value, setValue] = useState("");
   const handleChange = (e) => {
-    setFormData({["name"]:e.target.value});
+    setValue(e.target.value);
   };
-  const handleSubmit = () => {
-
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    serachSubmit(value);
+  };
   return (
     <div className="SearchForm">
       <form onSubmit={handleSubmit}>
         <input
           type="text"
           name="name"
-          value={fromData.name}
+          value={value}
           placeholder="search for name..."
           onChange={handleChange}
         />

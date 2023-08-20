@@ -7,21 +7,34 @@ import SearchForm from "./SearchForm";
 const Companies = () => {
   const { user, token } = useContext(UserContext);
   const [companies, setCompanies] = useState(null);
+
   useEffect(() => {
-    async function getCompanies() {
-      try {
-        const data = await JoblyApi.getCompanies();
-        setCompanies(data);
-      } catch (error) {}
-    }
     getCompanies();
   }, []);
+
+  async function getCompanies() {
+    try {
+      const data = await JoblyApi.getCompanies();
+      setCompanies(data);
+    } catch (error) {}
+  }
+
+  const serachSubmit = (data) => {
+    if (data === "") {
+      getCompanies();
+    } else {
+      const newJobs = companies.filter((company) =>
+        company.name.includes(data)
+      );
+      setCompanies(newJobs);
+    }
+  };
   if (!companies) return <h2>Loading</h2>;
   return (
     <div className="Companies">
       <h2>Companies</h2>
-      <SearchForm />
-      {companies.map((company, indx) => (
+      <SearchForm serachSubmit={serachSubmit} />
+      {companies.length === 0? <p>No results</p> : companies.map((company, indx) => (
         <CompanyCard key={indx} company={company} />
       ))}
     </div>
