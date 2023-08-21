@@ -12,7 +12,6 @@ const ProfilePage = () => {
     email: user.email,
     password: "",
   });
-  console.log(user);
   const handleChange = (e) => {
     setUserInfo({
       ...userInfo,
@@ -77,7 +76,7 @@ const ProfilePage = () => {
           />
         </div>
         <div className="save-btn">
-        <label ></label>
+          <label></label>
           <input type="submit" value="Save Change" />
         </div>
       </form>

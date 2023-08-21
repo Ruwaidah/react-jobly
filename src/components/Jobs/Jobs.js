@@ -4,25 +4,27 @@ import JobsDetails from "./JobsDetails";
 import SearchForm from "../Companies/SearchForm";
 
 const Jobs = () => {
-  const [jobs, setJobs] = useState(null);
+  const [value, setValue] = useState("");
+  const [jobs, setJobs] = useState([]);
+
   useEffect(() => {
     getJobs();
-  }, []);
+  }, [value]);
+
   async function getJobs() {
     try {
       const data = await JoblyApi.getJobs();
-      setJobs(data);
-    } catch {}
+      const jobsFilter = data.filter((j) => {
+        if (value === "") return true;
+        else {
+          return j.title.toLowerCase().includes(value.toLowerCase());
+        }
+      });
+      setJobs(jobsFilter);
+    } catch (error) {}
   }
   const serachSubmit = (data) => {
-    if (data === "") {
-      getJobs();
-    } else {
-      const newJobs = jobs.filter((job) =>
-        job.title.toLowerCase().includes(data.toLowerCase())
-      );
-      setJobs(newJobs);
-    }
+    setValue(data);
   };
 
   if (!jobs) return <h4>Loading</h4>;

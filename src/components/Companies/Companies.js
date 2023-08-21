@@ -5,28 +5,27 @@ import CompanyCard from "./CompanyCard";
 import SearchForm from "./SearchForm";
 
 const Companies = () => {
-  const [companies, setCompanies] = useState(null);
+  const [value, setValue] = useState("");
+  const [companies, setCompanies] = useState([]);
 
   useEffect(() => {
     getCompanies();
-  }, []);
+  }, [value]);
 
   async function getCompanies() {
     try {
       const data = await JoblyApi.getCompanies();
-      setCompanies(data);
+      const componiesFilter = data.filter((c) => {
+        if (value === "") {
+          return true;
+        } else return c.name.toLowerCase().includes(value.toLowerCase());
+      });
+      setCompanies(componiesFilter);
     } catch (error) {}
   }
 
   const serachSubmit = (data) => {
-    if (data === "") {
-      getCompanies();
-    } else {
-      const newJobs = companies.filter((company) =>
-        company.name.includes(data)
-      );
-      setCompanies(newJobs);
-    }
+    setValue(data);
   };
   if (!companies) return <h2>Loading</h2>;
   return (
