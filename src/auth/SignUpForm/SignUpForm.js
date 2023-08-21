@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
-import JoblyApi from "../../api";
+import "../Login-Sigup-Forms.css";
 import UserContext from "../UserContext";
 
 const SignUpForm = ({ signup }) => {
@@ -29,7 +29,7 @@ const SignUpForm = ({ signup }) => {
 
   if (token) return <Navigate to="/companies" />;
   return (
-    <div className="SignUpForm">
+    <div className="Login-Signup-Form">
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="username">Username</label>
@@ -92,8 +92,10 @@ const SignUpForm = ({ signup }) => {
             required
           />
         </div>
-        <input type="submit" value="Sing Up" />
-        <Link to="/">Cancel</Link>
+        <div className="form-btns">
+          <input type="submit" value="Sing Up" />
+          <Link to="/">Cancel</Link>
+        </div>{" "}
       </form>
     </div>
   );

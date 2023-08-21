@@ -1,11 +1,9 @@
-import { useContext, useEffect, useState } from "react";
-import UserContext from "../../auth/UserContext";
+import { useEffect, useState } from "react";
 import JoblyApi from "../../api";
 import CompanyCard from "./CompanyCard";
 import SearchForm from "./SearchForm";
 
 const Companies = () => {
-  const { user, token } = useContext(UserContext);
   const [companies, setCompanies] = useState(null);
 
   useEffect(() => {
@@ -32,11 +30,14 @@ const Companies = () => {
   if (!companies) return <h2>Loading</h2>;
   return (
     <div className="Companies">
-      <h2>Companies</h2>
       <SearchForm serachSubmit={serachSubmit} />
-      {companies.length === 0? <p>No results</p> : companies.map((company, indx) => (
-        <CompanyCard key={indx} company={company} />
-      ))}
+      {companies.length === 0 ? (
+        <p>No results</p>
+      ) : (
+        companies.map((company, indx) => (
+          <CompanyCard key={indx} company={company} />
+        ))
+      )}
     </div>
   );
 };

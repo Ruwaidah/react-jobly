@@ -1,0 +1,29 @@
+.Navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: black 1px solid;
+  height: 10vh;
+}
+
+.Navigation a {
+  font-size: 2rem;
+  color: rgb(78, 78, 159);
+  font-weight: bold;
+}
+
+.Navigation-logo {
+  width: 10%;
+}
+
+.Navigation-btn {
+  min-width: 20%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.Navigation .Navigation-all-btns {
+  width: 60%;
+  display: flex;
+  justify-content: space-around;
+}

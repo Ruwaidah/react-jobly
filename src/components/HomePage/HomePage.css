@@ -1,0 +1,26 @@
+.HomePage {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+}
+
+.HomePage h2 {
+    font-size: 3rem;
+    color: rgb(66, 78, 95);
+    margin: 0;
+}
+
+.HomePage p {
+    font-size: 2rem;
+}
+
+.HomePage-btns {
+font-size: 3rem;
+font-weight: bold;
+width: 20%;
+display: flex;
+justify-content: space-around
+}

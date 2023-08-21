@@ -2,6 +2,7 @@ import { Link, Navigate } from "react-router-dom";
 import { useState } from "react";
 import { useContext } from "react";
 import UserContext from "../UserContext";
+import "../Login-Sigup-Forms.css";
 
 const LoginForm = ({ login }) => {
   const { token } = useContext(UserContext);
@@ -25,7 +26,7 @@ const LoginForm = ({ login }) => {
   };
   if (token) return <Navigate to="/companies" />;
   return (
-    <div className="LoginForm">
+    <div className="Login-Signup-Form">
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="login-username">Username</label>
@@ -52,8 +53,10 @@ const LoginForm = ({ login }) => {
             required
           />
         </div>
-        <input type="submit" value="Login" />
-        <Link to="/">Cancel</Link>
+        <div className="form-btns">
+          <input type="submit" value="Login" />
+          <Link to="/">Cancel</Link>
+        </div>{" "}
       </form>
     </div>
   );
