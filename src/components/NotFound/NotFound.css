@@ -1,0 +1,7 @@
+.NotFound {
+    font-size: 3rem;
+}
+
+.NotFound a {
+    color: rgb(210, 42, 42);
+}
