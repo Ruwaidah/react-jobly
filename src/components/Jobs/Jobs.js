@@ -18,7 +18,9 @@ const Jobs = () => {
     if (data === "") {
       getJobs();
     } else {
-      const newJobs = jobs.filter((job) => job.title.toLowerCase().includes(data.toLowerCase()));
+      const newJobs = jobs.filter((job) =>
+        job.title.toLowerCase().includes(data.toLowerCase())
+      );
       setJobs(newJobs);
     }
   };
@@ -26,7 +28,6 @@ const Jobs = () => {
   if (!jobs) return <h4>Loading</h4>;
   return (
     <div className="Jobs">
-      <h2>Jobs</h2>
       <SearchForm serachSubmit={serachSubmit} />
       {jobs.length === 0 ? <p>No results</p> : <JobsDetails jobs={jobs} />}
     </div>

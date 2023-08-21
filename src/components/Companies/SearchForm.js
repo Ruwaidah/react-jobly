@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./SearchForm.css";
 
 const SearchForm = ({ serachSubmit }) => {
   const [value, setValue] = useState("");
@@ -19,7 +20,7 @@ const SearchForm = ({ serachSubmit }) => {
           placeholder="search for name..."
           onChange={handleChange}
         />
-        <button>Submit</button>
+        <input className="submit-btn" type="submit" />
       </form>
     </div>
   );

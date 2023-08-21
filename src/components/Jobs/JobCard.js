@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import JoblyApi from "../../api";
 import UserContext from "../../auth/UserContext";
+import "./JobCard.css";
 
 const JobCard = ({ job }) => {
   const { user } = useContext(UserContext);
@@ -14,11 +15,15 @@ const JobCard = ({ job }) => {
   };
   return (
     <div className="JobCard">
-      <h4>{job.title}</h4>
-      <p>{job.companyName}</p>
-      <p>Salary: {job.salary}</p>
-      <p>Equity: {job.equity}</p>
-       <button disabled={isApplied} onClick={applyToJob}>Apply</button>
+      <div>
+        <h4>{job.title}</h4>
+        <h5>{job.companyName}</h5>
+        <p>Salary: {job.salary}</p>
+        <p>Equity: {job.equity}</p>
+      </div>
+      <button className={isApplied? "job-applied" : null} disabled={isApplied} onClick={applyToJob}>
+        {isApplied ? "Applied" : "Apply"}
+      </button>
     </div>
   );
 };

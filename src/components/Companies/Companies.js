@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "./Companies.css";
 import JoblyApi from "../../api";
 import CompanyCard from "./CompanyCard";
 import SearchForm from "./SearchForm";
@@ -31,13 +32,15 @@ const Companies = () => {
   return (
     <div className="Companies">
       <SearchForm serachSubmit={serachSubmit} />
-      {companies.length === 0 ? (
-        <p>No results</p>
-      ) : (
-        companies.map((company, indx) => (
-          <CompanyCard key={indx} company={company} />
-        ))
-      )}
+      <div>
+        {companies.length === 0 ? (
+          <p>No results</p>
+        ) : (
+          companies.map((company, indx) => (
+            <CompanyCard key={indx} company={company} />
+          ))
+        )}
+      </div>
     </div>
   );
 };

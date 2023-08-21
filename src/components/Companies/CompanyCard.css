@@ -1,0 +1,28 @@
+.CompanyCard {
+    display: flex;
+    flex-direction: column;
+    border: 1px black solid;
+    width: 50%;
+    font-size: 3rem;
+    padding: 20px;
+    margin: 10px auto;
+    background-color: rgb(217, 239, 255);
+    border-radius: 10px;
+}
+
+.CompanyCard:hover {
+    background-color: rgb(208, 247, 253);
+}
+
+.CompanyCard h3 {
+    color:  rgb(73, 73, 155);
+}
+
+.CompanyCard p {
+    color: black;
+    text-align: start;
+}
+
+.CompanyCard h3, .CompanyCard p {
+    margin: 0;
+}
