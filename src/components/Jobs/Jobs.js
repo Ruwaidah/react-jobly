@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import JoblyApi from "../../api";
 import JobsDetails from "./JobsDetails";
 import SearchForm from "../Companies/SearchForm";
+import "./Jobs.css";
 
 const Jobs = () => {
   const [value, setValue] = useState("");
@@ -31,7 +32,11 @@ const Jobs = () => {
   return (
     <div className="Jobs">
       <SearchForm serachSubmit={serachSubmit} />
-      {jobs.length === 0 ? <p>No results</p> : <JobsDetails jobs={jobs} />}
+      {jobs.length === 0 ? (
+        <p className="no-result">No results</p>
+      ) : (
+        <JobsDetails jobs={jobs} />
+      )}
     </div>
   );
 };

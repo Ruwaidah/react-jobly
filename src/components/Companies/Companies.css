@@ -9,3 +9,7 @@
 .Companies div {
     width: 100%;
 }
+
+.no-result {
+    font-size: 2rem;
+}

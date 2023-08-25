@@ -5,6 +5,7 @@ import "./ProfilePage.css";
 
 const ProfilePage = () => {
   const { user, setUser } = useContext(UserContext);
+  const [updated, setUpdated] = useState(false);
   const [userInfo, setUserInfo] = useState({
     firstName: user.firstName,
     lastName: user.lastName,
@@ -20,11 +21,10 @@ const ProfilePage = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-
     async function updateProfile() {
       try {
         const data = await JoblyApi.saveProfile(user.username, userInfo);
-        console.log(data);
+        setUpdated(true);
         setUser({ ...user, ...data });
       } catch (error) {}
     }
@@ -34,6 +34,9 @@ const ProfilePage = () => {
   return (
     <div className="ProfilePage Login-Signup-Form">
       <form onSubmit={handleSubmit}>
+        <p className="Update-Successfully ">
+          {updated ? "Update Successfully " : null}
+        </p>
         <div>
           <label htmlFor="username">Usernme </label>
           <input

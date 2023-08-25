@@ -33,7 +33,7 @@ const Companies = () => {
       <SearchForm serachSubmit={serachSubmit} />
       <div>
         {companies.length === 0 ? (
-          <p>No results</p>
+          <p className="no-result">No results</p>
         ) : (
           companies.map((company, indx) => (
             <CompanyCard key={indx} company={company} />
